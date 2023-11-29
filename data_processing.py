@@ -1,7 +1,25 @@
-import csv, os
+import csv, os, copy
 
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
+
+class CSV_reader():
+    def __init__(self):
+        self.__location__ = os.path.realpath(
+            os.path.join(os.getcwd(), os.path.dirname(__file__)))
+        
+    def read_data_from_file(self, file_name):
+        """
+        :param: file_name : file's name
+        :return: a list of a datas in the csv file specified.
+        """
+        data = []
+        with open(os.path.join(self.__location__, file_name)) as f:
+            rows = csv.DictReader(f)
+            for r in rows:
+                data.append(dict(r))
+        return data
+
 
 class DB:
     def __init__(self):
@@ -99,4 +117,24 @@ class Table:
 
     def __str__(self):
         return self.table_name + ':' + str(self.table)
+    
+    def insert_row(self, dict):
+        '''
+        This method inserts a dictionary, dict, into a Table object, effectively adding a row to the Table. 
+        '''
+        # assuming the dict arg is correctly formatted
+        self.table.append(dict)
+
+    def update_row(self, primary_attribute, primary_attribute_value, update_attribute, update_value):
+        '''
+        This method updates the current value of update_attribute to update_value
+        For example, my_table.update_row('Film', 'A Serious Man', 'Year', '2022') will change the 'Year' attribute for the 'Film'
+        'A Serious Man' from 2009 to 2022
+        '''
+        for i in range(len(self.table)):
+            if self.table[i][primary_attribute] == primary_attribute_value:
+                self.table[i][update_attribute] = update_value
+                return True
+        raise ValueError
+
 
