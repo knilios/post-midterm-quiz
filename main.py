@@ -37,3 +37,6 @@ _dict['Year'] = '2017'
 
 movies_table.insert_row(_dict)
 print(movies_table)
+
+movies_table.update_row("Film", 'A Serious Man', 'Year', '2002')
+print(movies_table)
