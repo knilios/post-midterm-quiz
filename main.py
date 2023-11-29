@@ -23,3 +23,17 @@ count = 0
 for i in fantasy:
     count =+ 1
 print("Number of fantasy movies: ", count)
+
+# insert movie
+_dict = {}
+_dict['Film'] = 'The Shape of Water'
+_dict['Genre'] = 'Fantasy'
+_dict['Lead Studio'] = 'Fox'
+_dict['Audience score %'] = '72'
+_dict['Profitability'] = '9.765'
+_dict['Rotten Tomatoes %'] = '92'
+_dict['Worldwide Gross'] = '195.3'
+_dict['Year'] = '2017'
+
+movies_table.insert_row(_dict)
+print(movies_table)
